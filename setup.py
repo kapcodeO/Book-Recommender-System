@@ -16,10 +16,10 @@ setup(
     description=REPO_NAME,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/kapcodeO/Book-Recommender-System.git"
+    url="https://github.com/kapcodeO/Book-Recommender-System.git",
     author_email="kapilojha953@gmail.com",
     packages=find_packages(),
     license="MIT",
     python_requires=">=3.12",
-    install_requires=LIST_OF_REQUREMENTS
+    install_requires=LIST_OF_REQUIREMENTS
 )
