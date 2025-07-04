@@ -3,7 +3,7 @@ import sys
 from book_recommender.logging.log import logger
 from book_recommender.utils.util import read_yaml_file
 from book_recommender.exception.exception_handler import AppException
-from book_recommender.entity.config_entity import DataIngestionConfig
+from book_recommender.entity.config_entity import DataIngestionConfig, DataValidationConfig
 from book_recommender.constant import CONFIG_FILE_PATH
 
 class AppConfiguration:
@@ -30,6 +30,33 @@ class AppConfiguration:
             )
 
             logger.info(f"Data Ingestion Config : {response}")
+            return response
+        
+        except Exception as e:
+            logger.error(e)
+            raise AppException(e, sys) from e
+        
+    def get_data_validation_config(self) -> DataValidationConfig:
+        try:
+            data_ingestion_config = self.configs_info["data_ingestion_config"]
+            data_validation_config = self.configs_info["data_validation_config"]
+            dataset_dir = data_ingestion_config["dataset_dir"]
+            artifacts_dir = self.configs_info["artifacts_config"]["artifacts_dir"]
+            books_csv_file = data_validation_config["books_csv_file"]
+            ratings_csv_file = data_validation_config["ratings_csv_file"]
+
+            books_csv_file_dir = os.path.join(artifacts_dir, dataset_dir, data_ingestion_config["ingested_data_dir"])
+            ratings_csv_file_dir = os.path.join(artifacts_dir, dataset_dir, data_ingestion_config["ingested_data_dir"])
+            clean_data_dir = os.path.join(artifacts_dir, dataset_dir, data_validation_config["clean_data_dir"])
+            serialized_objects_dir = os.path.join(artifacts_dir, dataset_dir, data_validation_config["serialized_objects_dir"])
+
+            response = DataValidationConfig(
+                clean_data_dir = clean_data_dir,
+                books_csv_file = books_csv_file_dir,
+                ratings_csv_file = ratings_csv_file_dir,
+                serialized_objects_dir = serialized_objects_dir
+            )
+            logger.info(f"Data Validation Config: {response}")
             return response
         
         except Exception as e:
