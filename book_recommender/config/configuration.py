@@ -55,7 +55,7 @@ class AppConfiguration:
                                                 "books_data",
                                                 ratings_csv_file)
             clean_data_dir = os.path.join(artifacts_dir, dataset_dir, data_validation_config["clean_data_dir"])
-            serialized_objects_dir = os.path.join(artifacts_dir, dataset_dir, data_validation_config["serialized_objects_dir"])
+            serialized_objects_dir = os.path.join(artifacts_dir, data_validation_config["serialized_objects_dir"])
 
             response = DataValidationConfig(
                 clean_data_dir = clean_data_dir,
