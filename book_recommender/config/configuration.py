@@ -45,8 +45,15 @@ class AppConfiguration:
             books_csv_file = data_validation_config["books_csv_file"]
             ratings_csv_file = data_validation_config["ratings_csv_file"]
 
-            books_csv_file_dir = os.path.join(artifacts_dir, dataset_dir, data_ingestion_config["ingested_data_dir"])
-            ratings_csv_file_dir = os.path.join(artifacts_dir, dataset_dir, data_ingestion_config["ingested_data_dir"])
+            books_csv_file_dir = os.path.join(artifacts_dir, 
+                                              dataset_dir, 
+                                              data_ingestion_config["ingested_data_dir"],
+                                              "books_data", books_csv_file)
+            ratings_csv_file_dir = os.path.join(artifacts_dir, 
+                                                dataset_dir, 
+                                                data_ingestion_config["ingested_data_dir"],
+                                                "books_data",
+                                                ratings_csv_file)
             clean_data_dir = os.path.join(artifacts_dir, dataset_dir, data_validation_config["clean_data_dir"])
             serialized_objects_dir = os.path.join(artifacts_dir, dataset_dir, data_validation_config["serialized_objects_dir"])
 

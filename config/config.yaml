@@ -9,6 +9,6 @@ data_ingestion_config:
 
 data_validation_config:
   clean_data_dir: clean_data
-  serialized_data_dir: serialized_objects
+  serialized_objects_dir: serialized_objects
   books_csv_file: books.csv
   ratings_csv_file: ratings.csv
