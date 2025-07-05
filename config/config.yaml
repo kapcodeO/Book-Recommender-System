@@ -12,3 +12,6 @@ data_validation_config:
   serialized_objects_dir: serialized_objects
   books_csv_file: books.csv
   ratings_csv_file: ratings.csv
+
+data_transformation_config:
+  transformed_data_dir: transformed_data
