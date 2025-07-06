@@ -31,7 +31,7 @@ class ModelTrainer:
             book_sparse = csr_matrix(book_pivot)
 
             # train the model
-            model = NearestNeighbors()
+            model = NearestNeighbors(algorithm="brute", metric="cosine")
             model.fit(book_sparse)
 
             # save model object for recommendations

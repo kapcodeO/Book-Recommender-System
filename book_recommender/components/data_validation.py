@@ -37,7 +37,7 @@ class DataValidation:
                 "Book-Author" : "author",
                 "Year-Of-Publication" : "year",
                 "Publisher" : "publisher",
-                "Image-URL-L" : "image-url"
+                "Image-URL-L" : "image_url"
             }, inplace=True)
 
             ratings.rename(columns={
