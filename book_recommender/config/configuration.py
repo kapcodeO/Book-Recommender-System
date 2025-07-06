@@ -80,7 +80,7 @@ class AppConfiguration:
             artifacts_dir = self.configs_info["artifacts_config"]["artifacts_dir"]
 
             clean_data_dir = os.path.join(artifacts_dir, dataset_dir, data_validation_config["clean_data_dir"], "clean_data.csv")
-            transformed_data_dir = os.path.join(artifacts_dir, dataset_dir, data_transformation_config["transformer_data_dir"], "tranformed_data")
+            transformed_data_dir = os.path.join(artifacts_dir, dataset_dir, data_transformation_config["transformed_data_dir"])
 
             response = DataTransformationConfig(
                 clean_data_dir = clean_data_dir,

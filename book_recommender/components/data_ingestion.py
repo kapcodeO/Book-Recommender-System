@@ -1,3 +1,5 @@
+# STAGE 1
+
 import os
 import sys
 from book_recommender.logging.log import logger
