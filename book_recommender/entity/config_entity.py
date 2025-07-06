@@ -9,3 +9,6 @@ DataValidationConfig = namedtuple("DataValidationConfig",
 
 DataTransformationConfig = namedtuple("DataTransformationConfig",
                                       ["clean_data_dir", "transformed_data_dir"])
+
+ModelTrainerConfig = namedtuple("ModelTrainerConfig",
+                                ["transformed_data_dir", "trained_model_dir", "trained_model_name"])
