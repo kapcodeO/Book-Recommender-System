@@ -24,7 +24,10 @@ class ModelTrainer:
         """
         try:
             # load pivot data
-            book_pivot = pickle.load(open(self.data_transformation_config["transformed_data_dir"], "rb"))
+            pivot_path = os.path.join(self.data_transformation_config.transformed_data_dir, "book_pivot.pkl")
+            logger.info(f"Loading pivot matrix from: {pivot_path}")
+            book_pivot = pickle.load(open(pivot_path, "rb"))
+            logger.info(f"Type of loaded object: {type(book_pivot)}")
             book_sparse = csr_matrix(book_pivot)
 
             # train the model
@@ -32,10 +35,10 @@ class ModelTrainer:
             model.fit(book_sparse)
 
             # save model object for recommendations
-            os.makedirs(self.model_trainer_config["trained_model_dir"], exist_ok=True)
-            model_path = os.path.join(self.model_trainer_config["trained_model_dir"], self.model_trainer_config["trained_model_name"])
+            os.makedirs(self.model_trainer_config.trained_model_dir, exist_ok=True)
+            model_path = os.path.join(self.model_trainer_config.trained_model_dir, self.model_trainer_config.trained_model_name)
             pickle.dump(model, open(model_path, "wb"))
-            logger.info(f"Saving final model info to : {model_path}")
+            logger.info(f"Saving final model to : {model_path}")
 
         except Exception as e:
             logger.error(e)

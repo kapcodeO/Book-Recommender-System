@@ -15,7 +15,6 @@ class DataIngestion:
         data_ingestion_config : DataIngestionConfig
         """
         try:
-            logger.info(f"{"="*20} Data Ingestion Started {"="*20}")
             self.data_ingestion_config = app_config.get_data_ingestion_config()
         except Exception as e:
             logger.error(e)
@@ -58,6 +57,7 @@ class DataIngestion:
         
     def initiate_data_ingestion(self):
         try:
+            logger.info(f"{"="*20} Data Ingestion Started {"="*20}")
             zip_file_path = self.download_data()
             self.extract_zip_file(zip_file_path=zip_file_path)
             logger.info(f"{"="*20} Data Ingestion Completed {"="*20}")
