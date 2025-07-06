@@ -4,7 +4,7 @@ from book_recommender.logging.log import logger
 from book_recommender.utils.util import read_yaml_file
 from book_recommender.exception.exception_handler import AppException
 from book_recommender.entity.config_entity import DataIngestionConfig, DataValidationConfig
-from book_recommender.entity.config_entity import DataTransformationConfig
+from book_recommender.entity.config_entity import DataTransformationConfig, ModelTrainerConfig
 from book_recommender.constant import CONFIG_FILE_PATH
 
 class AppConfiguration:
@@ -88,6 +88,30 @@ class AppConfiguration:
             )
             
             logger.info(f"Data transformation config : {response}")
+            return response
+        
+        except Exception as e:
+            logger.error(e)
+            raise AppException(e, sys) from e
+        
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        try:
+            model_trainer_config = self.configs_info["model_trainer_config"]
+            data_transformation_config = self.configs_info["data_ingestion_config"]
+            dataset_dir = self.data_validation["dataset_dir"]
+            artifacts_dir = self.configs_info["artifacts_config"]["artifacts_dir"]
+
+            transformed_data_dir = os.path.join(artifacts_dir, dataset_dir, data_transformation_config["transformed_data_dir"])
+            trained_model_dir = os.path.join(artifacts_dir, dataset_dir, model_trainer_config["model_trainer_dir"])
+            trained_model_name = model_trainer_config["trained_model_name"]
+
+            response = ModelTrainerConfig(
+                transformed_data_dir = transformed_data_dir,
+                trained_model_dir = trained_model_dir,
+                trained_model_name = trained_model_name
+            )
+
+            logger.info(f"Model Trainer Config: {response}")
             return response
         
         except Exception as e:
