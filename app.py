@@ -12,6 +12,8 @@ class Recommendation:
     def __init__(self, app_config = AppConfiguration()):
         try:
             self.recommendation_config = app_config.get_recommendation_config()
+            self.model_trainer_config = app_config.get_model_trainer_config()
+            self.book_names_dir = self.recommendation_config.book_name_serialized_objects
         except Exception as e:
             logger.error(e)
             raise AppException(e, sys) from e
@@ -42,7 +44,7 @@ class Recommendation:
     def recommend_book(self, book_name):
         try:
             books_list = []
-            model = pickle.load(open(self.recommendation_config.trained_model_dir, "rb"))
+            model = pickle.load(open(os.path.join(self.model_trainer_config.trained_model_dir, self.model_trainer_config.trained_model_name), "rb"))
             book_pivot = pickle.load(open(self.recommendation_config.book_pivot_serialized_objects, "rb"))
             book_id = np.where(book_pivot.index == book_name)[0][0]
             distance, suggestion = model.kneighbors(book_pivot.iloc[book_id,:].values.reshape(1, -1), n_neighbors=6)
@@ -93,6 +95,7 @@ class Recommendation:
             logger.error(e)
             raise AppException(e, sys) from e
         
+        
 if __name__ == "__main__":
     st.header("End to End Books Recommendation System")
     st.text("This is collaborativate filtering based recommendation engine")
@@ -100,10 +103,10 @@ if __name__ == "__main__":
     obj = Recommendation()
 
     # Training
-    if st.button("Train Recommender System:"):
+    if st.button("Train Recommender System"):
         obj.train_engine()
         
-    book_names = pickle.load(open(os.path.join("templates", "book_names.pkl"), "rb"))
+    book_names = pickle.load(open(obj.book_names_dir, "rb"))
     selected_books = st.selectbox(
         "Type or select a book from dropdown",
         book_names

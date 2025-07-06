@@ -119,7 +119,7 @@ class AppConfiguration:
             logger.error(e)
             raise AppException(e, sys) from e
         
-    def get_model_recommendation_config(self) -> ModelRecommendationConfig:
+    def get_recommendation_config(self) -> ModelRecommendationConfig:
         try:
             data_validation_config = self.configs_info["data_validation_config"]
             model_trainer_config = self.configs_info["model_trainer_config"]
@@ -140,7 +140,7 @@ class AppConfiguration:
                 trained_model_path = trained_model_path
             )
             
-            logger.info(f"Model Reccomendation Config: {response}")
+            logger.info(f"Model Recommendation Config: {response}")
             return response
         
         except Exception as e:
