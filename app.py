@@ -47,7 +47,7 @@ class Recommendation:
             book_id = np.where(book_pivot.index == book_name)[0][0]
             distance, suggestion = model.kneighbors(book_pivot.iloc[book_id,:].values.reshape(1, -1), n_neighbors=6)
 
-            poster_url = fetch_poster(suggestion)
+            poster_url = self.fetch_poster(suggestion)
 
             for i in range(len(suggestion)):
                 books = book_pivot.index[suggestion[i]]
@@ -105,7 +105,7 @@ if __name__ == "__main__":
         
     book_names = pickle.load(open(os.path.join("templates", "book_names.pkl"), "rb"))
     selected_books = st.selectbox(
-        "Type or select a book from dropdown"
+        "Type or select a book from dropdown",
         book_names
     )
 

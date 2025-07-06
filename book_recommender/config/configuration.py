@@ -5,6 +5,7 @@ from book_recommender.utils.util import read_yaml_file
 from book_recommender.exception.exception_handler import AppException
 from book_recommender.entity.config_entity import DataIngestionConfig, DataValidationConfig
 from book_recommender.entity.config_entity import DataTransformationConfig, ModelTrainerConfig
+from book_recommender.entity.config_entity import ModelRecommendationConfig
 from book_recommender.constant import CONFIG_FILE_PATH
 
 class AppConfiguration:
@@ -112,6 +113,34 @@ class AppConfiguration:
             )
 
             logger.info(f"Model Trainer Config: {response}")
+            return response
+        
+        except Exception as e:
+            logger.error(e)
+            raise AppException(e, sys) from e
+        
+    def get_model_recommendation_config(self) -> ModelRecommendationConfig:
+        try:
+            data_validation_config = self.configs_info["data_validation_config"]
+            model_trainer_config = self.configs_info["model_trainer_config"]
+            trained_model_name = model_trainer_config["trained_model_name"]
+            artifacts_dir = self.configs_info["artifacts_config"]["artifacts_dir"]
+            dataset_dir = self.configs_info["data_ingestion_config"]["dataset_dir"]
+            trained_model_dir = os.path.join(artifacts_dir, dataset_dir, model_trainer_config["trained_model_dir"])
+
+            book_name_serialized_objects = os.path.join(artifacts_dir, data_validation_config["serialized_objects_dir"], "book_names.pkl")
+            book_pivot_serialized_objects = os.path.join(artifacts_dir, data_validation_config["serialized_objects_dir"], "book_pivot.pkl")
+            final_rating_serialized_objects = os.path.join(artifacts_dir, data_validation_config["serialized_objects_dir"], "final_ratings.pkl")
+            trained_model_path = os.path.join(trained_model_dir, trained_model_name)
+
+            response = ModelRecommendationConfig(
+                book_name_serialized_objects = book_name_serialized_objects,
+                book_pivot_serialized_objects = book_pivot_serialized_objects,
+                final_rating_serialized_objects = final_rating_serialized_objects,
+                trained_model_path = trained_model_path
+            )
+            
+            logger.info(f"Model Reccomendation Config: {response}")
             return response
         
         except Exception as e:
