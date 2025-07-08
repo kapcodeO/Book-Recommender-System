@@ -29,3 +29,10 @@ model_trainer_config:
   trained_model_name: model.pkl
 
 
+
+pretrained_config:
+  pretrained_dir: pretrained_objects
+  pretrained_model: model.pkl
+  pretrained_book_names: book_names.pkl
+  pretrained_final_ratings: final_ratings.pkl
+  pretrained_book_pivot: book_pivot.pkl

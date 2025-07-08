@@ -6,14 +6,12 @@ import streamlit as st
 from book_recommender.logging.log import logger
 from book_recommender.config.configuration import AppConfiguration
 from book_recommender.exception.exception_handler import AppException
-from book_recommender.pipeline.training_pipeline import TrainingPipeline
 
 class Recommendation:
     def __init__(self, app_config = AppConfiguration()):
         try:
-            self.recommendation_config = app_config.get_recommendation_config()
-            self.model_trainer_config = app_config.get_model_trainer_config()
-            self.book_names_dir = self.recommendation_config.book_name_serialized_objects
+            self.pretrained_config = app_config.get_pretrained_config()
+            self.book_names_dir = self.pretrained_config.pretrained_book_names
         except Exception as e:
             logger.error(e)
             raise AppException(e, sys) from e
@@ -23,8 +21,8 @@ class Recommendation:
             book_name = []
             ids_index = []
             poster_url = []
-            book_pivot = pickle.load(open(self.recommendation_config.book_pivot_serialized_objects, "rb"))
-            final_rating = pickle.load(open(self.recommendation_config.final_rating_serialized_objects, "rb"))
+            book_pivot = pickle.load(open(self.pretrained_config.pretrained_book_pivot, "rb"))
+            final_rating = pickle.load(open(self.pretrained_config.pretrained_final_ratings, "rb"))
 
             for book_id in suggestion:
                 book_name.append(book_pivot.index[book_id])
@@ -46,8 +44,8 @@ class Recommendation:
     def recommend_book(self, book_name):
         try:
             books_list = []
-            model = pickle.load(open(os.path.join(self.model_trainer_config.trained_model_dir, self.model_trainer_config.trained_model_name), "rb"))
-            book_pivot = pickle.load(open(self.recommendation_config.book_pivot_serialized_objects, "rb"))
+            model = pickle.load(open(self.pretrained_config.pretrained_model, "rb"))
+            book_pivot = pickle.load(open(self.pretrained_config.pretrained_book_pivot, "rb"))
             book_id = np.where(book_pivot.index == book_name)[0][0]
             distance, suggestion = model.kneighbors(book_pivot.iloc[book_id,:].values.reshape(1, -1), n_neighbors=6)
             
@@ -88,6 +86,7 @@ if __name__ == "__main__":
     st.caption("Find your next favorite read using collaborative filtering")
 
     obj = Recommendation()
+    
     book_names = pickle.load(open(obj.book_names_dir, "rb"))
 
     selected_books = st.selectbox(

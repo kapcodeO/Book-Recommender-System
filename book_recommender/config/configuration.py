@@ -5,7 +5,7 @@ from book_recommender.utils.util import read_yaml_file
 from book_recommender.exception.exception_handler import AppException
 from book_recommender.entity.config_entity import DataIngestionConfig, DataValidationConfig
 from book_recommender.entity.config_entity import DataTransformationConfig, ModelTrainerConfig
-from book_recommender.entity.config_entity import ModelRecommendationConfig
+from book_recommender.entity.config_entity import ModelRecommendationConfig, PreTrainedConfig
 from book_recommender.constant import CONFIG_FILE_PATH
 
 class AppConfiguration:
@@ -143,6 +143,29 @@ class AppConfiguration:
             logger.info(f"Model Recommendation Config: {response}")
             return response
         
+        except Exception as e:
+            logger.error(e)
+            raise AppException(e, sys) from e
+        
+    def get_pretrained_config(self) -> PreTrainedConfig:
+        try:
+            pretrained_config = self.configs_info["pretrained_config"]
+            pretrained_dir = pretrained_config["pretrained_dir"]
+            pretrained_model_dir = os.path.join(pretrained_dir, pretrained_config["pretrained_model"])
+            pretrained_book_names_dir = os.path.join(pretrained_dir, pretrained_config["pretrained_book_names"])
+            pretrained_final_ratings_dir = os.path.join(pretrained_dir, pretrained_config["pretrained_final_ratings"])
+            pretrained_book_pivot_dir = os.path.join(pretrained_dir, pretrained_config["pretrained_book_pivot"])
+
+            response = PreTrainedConfig(
+                pretrained_model = pretrained_model_dir,
+                pretrained_book_names = pretrained_book_names_dir,
+                pretrained_final_ratings = pretrained_final_ratings_dir,
+                pretrained_book_pivot = pretrained_book_pivot_dir
+            )
+            
+            logger.info(f"Pretrained Objects Config: {response}")
+            return response
+
         except Exception as e:
             logger.error(e)
             raise AppException(e, sys) from e

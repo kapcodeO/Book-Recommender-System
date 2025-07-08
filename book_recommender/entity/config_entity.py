@@ -16,3 +16,7 @@ ModelTrainerConfig = namedtuple("ModelTrainerConfig",
 ModelRecommendationConfig = namedtuple("ModelRecommendationConfig",
                                        ["book_name_serialized_objects", "book_pivot_serialized_objects",
                                         "final_rating_serialized_objects", "trained_model_path"])
+
+PreTrainedConfig = namedtuple("PreTrainedConfig",
+                              ["pretrained_model", "pretrained_book_names",
+                               "pretrained_final_ratings", "pretrained_book_pivot"])
