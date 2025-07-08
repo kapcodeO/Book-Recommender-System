@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *.class
 artifacts/
+project_demo/
 
 # C extensions
 *.so
