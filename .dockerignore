@@ -4,6 +4,7 @@ __pycache__/
 *.class
 artifacts/
 project_demo/
+notebook/
 
 # C extensions
 *.so
