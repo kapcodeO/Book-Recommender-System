@@ -57,11 +57,19 @@ Additional directories:
 
 ## 🚀 Getting Started
 
+### 📂 Create a Project Folder
+
+```bash
+# go to the desired location then open
+# powershell or terminal in that folder then run
+mkdir book-recommender
+cd book-recommender
+```
+
 ### 🔁 Clone this Repository
 
 ```bash
 git clone https://github.com/kapcodeO/Book-Recommender-System.git
-cd book-recommender
 ```
 
 ### 🧱 Set Up Virtual Environment
