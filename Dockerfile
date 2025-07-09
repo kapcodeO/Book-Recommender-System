@@ -1,5 +1,5 @@
 # Base Image
-FROM python:3.12-slim-buster
+FROM python:3.12-slim
 
 # Because streamlit works on localhost::8501
 EXPOSE 8501

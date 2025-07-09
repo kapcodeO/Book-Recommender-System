@@ -259,6 +259,8 @@ Run and Manage Docker Container:
 ```bash
 docker run -d -p 8501:8501 kapcodeO/book-recommender
 docker ps
+# now your app is running
+# just paste the <public ip address>:8501 in any browser
 docker stop container_id
 docker rm $(docker ps -a -q)
 ```
