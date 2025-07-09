@@ -225,7 +225,56 @@ Streamlit-powered interface to interact with recommendation system:
 
 ---
 
-## 🐳 Docker (Optional)
+## 🐳 Streamlit App Docker Image Deployment
+
+1. Login with your AWS console and open and EC2 Instance
+2. NOTE: these commands are meant to run on EC2 Intance not on local machine
+3. NOTE: do the port mapping to -> 8501
+4. Run the following commands:
+
+Install Docker:
+```bash
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker ubuntu
+newgrp docker
+```
+
+Clone you Project:
+```bash
+git clone "https://github.com/kapcodeO/Book-Recommender-System.git"
+cd Book-Recommender-System
+```
+
+Build Image:
+```bash
+docker build -t kapcodeO/book-recommender:latest .
+docker images -a
+```
+
+Run and Manage Docker Container:
+```bash
+docker run -d -p 8501:8501 kapcodeO/book-recommender
+docker ps
+docker stop container_id
+docker rm $(docker ps -a -q)
+```
+
+Login Docker:
+```bash
+docker login
+docker push kapcodeO/book-recommender:latest
+docker rmi kapcodeO/book-recommender:latest
+docker pull kapcodeO/book-recommender
+```
+
+
+### For local machine: 
+
+NOTE: you need to have docker desktop installed on your local machine
 
 Build image:
 ```bash
@@ -234,7 +283,14 @@ docker build -t book-recommender .
 
 Run container:
 ```bash
-docker run -p 8501:8501 book-recommender
+docker run -d -p 8501:8501 book-recommender
+```
+
+To see live logs (optional):
+```bash
+# To find the container_id
+docker ps       
+docker logs <container_id>
 ```
 
 ---
