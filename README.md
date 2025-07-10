@@ -93,6 +93,11 @@ venv\Scripts\activate
 deactivate
 ```
 
+### Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
 ---
 
 ## ⚡ Quick Start (Using Pretrained Models)
