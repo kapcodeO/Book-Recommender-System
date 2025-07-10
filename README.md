@@ -259,7 +259,7 @@ docker stop container_id
 docker rm $(docker ps -a -q)
 ```
 
-Login Docker:
+Login Docker (for docker hub not needed for AWS):
 ```bash
 docker login
 docker push kapcodeO/book-recommender:latest
@@ -312,6 +312,13 @@ Follow these steps to deploy on AWS :
 - In `Network Settings` > `Create Security Group` > select all `Allow`options.
 - In `Configure Storage` enter `16` instead of `8`.
 - Then click on `Launch Instance` located on bottom right side of page.
+- After that click on `Instance ID` and Scroll Down and click `Security`.
+- Here click on `Security Groups link` > `Edit Inbound Rules`.
+- Click on `Add Rule` in the column enter `8501` for streamlit port mapping.
+- In the next column enter `0.0.0.0/0` to access from anywhere.
+- Click on `Save Changes` then go back to instance and click on `Instance ID`.
+- Then click on `Connect` it will launch and `Ubuntu t2.large instance on a remote server`.
+- Then run the following `Streamlit App Docker Image Deployment`
 
 ---
 
