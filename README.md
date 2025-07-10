@@ -301,7 +301,14 @@ Follow these steps to deploy on AWS :
 - In the right corner select server `Asia Pacific (Mumbai)`.
 - In the Search Tab search for `EC2`.
 - Then navigate to `Dashboard` in the top left menu.
-
+- Click on `Launch Instance`.
+- Enter the name of your project or instance .
+- Select `Ubuntu` as an Application and OS Images.
+- Then select `t2.large` instance type.
+- ⚠️ NOTE: it will charge you atleast 12Rs per hour.
+- Create a new keypair value by clicking on `create new key pair`.
+- Select on `.pem` and click the bottom yellow button.
+- That will download an ssh certificate to your machine. 
 
 ---
 
