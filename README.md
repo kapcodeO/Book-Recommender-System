@@ -144,12 +144,6 @@ CONFIG_FILE_PATH = os.path.join(os.getcwd(), "config.yaml")
 artifacts_config:
   artifacts_dir: artifacts
 
-data_ingestion_config:
-  dataset_download_url: "https://github.com/kapcodeO/asset-strore/raw/refs/heads/main/book_data.zip"
-  dataset_dir: dataset
-  ingested_data_dir: ingested_data
-  raw_data_dir: raw_data
-
 data_validation_config:
   clean_data_dir: clean_data
   serialized_objects_dir: serialized_objects
@@ -294,6 +288,12 @@ To see live logs (optional):
 docker ps       
 docker logs <container_id>
 ```
+
+
+---
+
+## 📝 AWS Deployment
+Every script execution logs events in the `logs/` directory.
 
 ---
 
