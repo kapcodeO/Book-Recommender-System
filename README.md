@@ -297,7 +297,7 @@ docker logs <container_id>
 Follow these steps to deploy on AWS :
 
 - Open [AWS](https://aws.amazon.com/) and login .
-- Create a account if account doesen't already exists.
+- Create a account if account doesen't already exists.(will ask for Debit/Credit card and PAN number but it's safe.)
 - In the right corner select server `Asia Pacific (Mumbai)`.
 - In the Search Tab search for `EC2`.
 - Then navigate to `Dashboard` in the top left menu.
@@ -309,6 +309,9 @@ Follow these steps to deploy on AWS :
 - Create a new keypair value by clicking on `create new key pair`.
 - Select on `.pem` and click the bottom yellow button.
 - That will download an ssh certificate to your machine. 
+- In `Network Settings` > `Create Security Group` > select all `Allow`options.
+- In `Configure Storage` enter `16` instead of `8`.
+- Then click on `Launch Instance` located on bottom right side of page.
 
 ---
 
