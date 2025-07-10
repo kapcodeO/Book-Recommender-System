@@ -293,7 +293,15 @@ docker logs <container_id>
 ---
 
 ## 📝 AWS Deployment
-Every script execution logs events in the `logs/` directory.
+
+Follow these steps to deploy on AWS :
+
+- Open [AWS](https://aws.amazon.com/) and login .
+- Create a account if account doesen't already exists.
+- In the right corner select server `Asia Pacific (Mumbai)`.
+- In the Search Tab search for `EC2`.
+- Then navigate to `Dashboard` in the top left menu.
+
 
 ---
 
