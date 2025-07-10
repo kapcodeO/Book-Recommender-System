@@ -246,6 +246,7 @@ Follow these steps to deploy on AWS :
 - Click on `Save Changes` then go back to instance and click on `Instance ID`.
 - Then click on `Connect` it will launch and `Ubuntu t2.large instance on a remote server`.
 - Then run the following `Streamlit App Docker Image Deployment`
+- ⚠️ NOTE: after deployment don't forget to delete the EC2 instance and key-value pair and security group instance.
 
 ---
 
