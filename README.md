@@ -219,6 +219,36 @@ Streamlit-powered interface to interact with recommendation system:
 
 ---
 
+## 📝 AWS Deployment
+
+Follow these steps to deploy on AWS :
+
+- Open [AWS](https://aws.amazon.com/) and login .
+- Create a account if account doesen't already exists.(will ask for Debit/Credit card and PAN number but it's safe.)
+- In the right corner select server `Asia Pacific (Mumbai)`.
+- In the Search Tab search for `EC2`.
+- Then navigate to `Dashboard` in the top left menu.
+- Click on `Launch Instance`.
+- Enter the name of your project or instance .
+- Select `Ubuntu` as an Application and OS Images.
+- Then select `t2.large` instance type.
+- ⚠️ NOTE: it will charge you atleast 12Rs per hour.
+- Create a new keypair value by clicking on `create new key pair`.
+- Select on `.pem` and click the bottom yellow button.
+- That will download an ssh certificate to your machine. 
+- In `Network Settings` > `Create Security Group` > select all `Allow`options.
+- In `Configure Storage` enter `16` instead of `8`.
+- Then click on `Launch Instance` located on bottom right side of page.
+- After that click on `Instance ID` and Scroll Down and click `Security`.
+- Here click on `Security Groups link` > `Edit Inbound Rules`.
+- Click on `Add Rule` in the column enter `8501` for streamlit port mapping.
+- In the next column enter `0.0.0.0/0` to access from anywhere.
+- Click on `Save Changes` then go back to instance and click on `Instance ID`.
+- Then click on `Connect` it will launch and `Ubuntu t2.large instance on a remote server`.
+- Then run the following `Streamlit App Docker Image Deployment`
+
+---
+
 ## 🐳 Streamlit App Docker Image Deployment
 
 1. Login with your AWS console and open and EC2 Instance
@@ -288,37 +318,6 @@ To see live logs (optional):
 docker ps       
 docker logs <container_id>
 ```
-
-
----
-
-## 📝 AWS Deployment
-
-Follow these steps to deploy on AWS :
-
-- Open [AWS](https://aws.amazon.com/) and login .
-- Create a account if account doesen't already exists.(will ask for Debit/Credit card and PAN number but it's safe.)
-- In the right corner select server `Asia Pacific (Mumbai)`.
-- In the Search Tab search for `EC2`.
-- Then navigate to `Dashboard` in the top left menu.
-- Click on `Launch Instance`.
-- Enter the name of your project or instance .
-- Select `Ubuntu` as an Application and OS Images.
-- Then select `t2.large` instance type.
-- ⚠️ NOTE: it will charge you atleast 12Rs per hour.
-- Create a new keypair value by clicking on `create new key pair`.
-- Select on `.pem` and click the bottom yellow button.
-- That will download an ssh certificate to your machine. 
-- In `Network Settings` > `Create Security Group` > select all `Allow`options.
-- In `Configure Storage` enter `16` instead of `8`.
-- Then click on `Launch Instance` located on bottom right side of page.
-- After that click on `Instance ID` and Scroll Down and click `Security`.
-- Here click on `Security Groups link` > `Edit Inbound Rules`.
-- Click on `Add Rule` in the column enter `8501` for streamlit port mapping.
-- In the next column enter `0.0.0.0/0` to access from anywhere.
-- Click on `Save Changes` then go back to instance and click on `Instance ID`.
-- Then click on `Connect` it will launch and `Ubuntu t2.large instance on a remote server`.
-- Then run the following `Streamlit App Docker Image Deployment`
 
 ---
 
